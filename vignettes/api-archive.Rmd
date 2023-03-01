@@ -57,6 +57,6 @@ threads <- conversations |>
 # This step takes about 7 minutes. Technically I guess GHA would be ok with
 # that, but it feels better to be more targeted.
 
-conversations_r4ds <- tidy_conversations(conversations, threads) |> 
+conversations_r4ds <- tidy_conversations(conversations, threads) |>
   r4ds_process_convos()
 ```

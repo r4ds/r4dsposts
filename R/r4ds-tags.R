@@ -17,7 +17,7 @@ r4ds_process_convos <- function(convos_tbl) {
 .tag_reactions <- function(convos_tbl) {
   if (
     "reactions" %in% colnames(convos_tbl) &&
-    "user" %in% colnames(convos_tbl)
+      "user" %in% colnames(convos_tbl)
   ) {
     mentors <- .get_channel_members("GAJ8D7YKA")
 
@@ -37,7 +37,9 @@ r4ds_process_convos <- function(convos_tbl) {
         ),
         reaction_nevermind = .has_reaction(
           reactions = .data$reactions,
-          reaction_name = c("question-nevermind", "octagonal_sign", "nevermind"),
+          reaction_name = c(
+            "question-nevermind", "octagonal_sign", "nevermind"
+          ),
           posters = .data$user,
           valid_users = mentors
         ),
@@ -82,7 +84,7 @@ r4ds_process_convos <- function(convos_tbl) {
   return(
     replies |>
       dplyr::arrange(dplyr::desc(.data$ts)) |>
-      head(1) |>
+      utils::head(1) |>
       dplyr::pull(.data$user) == user
   )
 }

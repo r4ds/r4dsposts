@@ -110,20 +110,23 @@ tidy_conversations <- function(conversations, threads = NULL) {
     }
     if (
       "purpose" %in% colnames(convos_tbl) &&
-      all(is.na(convos_tbl$purpose))
+        all(is.na(convos_tbl$purpose))
     ) {
       convos_tbl$purpose <- NULL
     }
     if (
       "topic" %in% colnames(convos_tbl) &&
-      all(is.na(convos_tbl$topic))
+        all(is.na(convos_tbl$topic))
     ) {
       convos_tbl$topic <- NULL
     }
   }
   if (
     "root" %in% colnames(convos_tbl) &&
-    purrr::every(convos_tbl$root, \(convos_tbl) all(is.null(unlist(convos_tbl))))
+      purrr::every(
+        convos_tbl$root,
+        \(convos_tbl) all(is.null(unlist(convos_tbl)))
+      )
   ) {
     convos_tbl$root <- NULL
   }
@@ -232,14 +235,15 @@ tidy_conversations <- function(conversations, threads = NULL) {
       \(replies) {
         this_tbl <- .rectangle_conversation_single(replies)
         # The thread_ts column is redundant at this point. I might keep it for
-        # joining, but for now I want to put these into the tbl as a list column.
+        # joining, but for now I want to put these into the tbl as a list
+        # column.
         this_tbl$thread_ts <- NULL
 
         if (
           "parent_user_id" %in% colnames(this_tbl) &&
-          length(unique(
-            this_tbl$parent_user_id[!is.na(this_tbl$parent_user_id)]
-          )) > 1
+            length(unique(
+              this_tbl$parent_user_id[!is.na(this_tbl$parent_user_id)]
+            )) > 1
         ) {
           stop("More than 1 parent user.")
         }
