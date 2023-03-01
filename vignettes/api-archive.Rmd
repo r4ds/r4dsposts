@@ -1,0 +1,62 @@
+---
+title: "Use the Slack API to Parse All Posts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Use the Slack API to Parse All Posts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r setup}
+library(r4dsposts)
+library(rlang)
+library(slackteams)
+library(slackthreads)
+library(stringr)
+```
+
+```{r parse-all}
+# Set up a SLACK_API_TOKEN environment variable.
+channels <- slackteams::get_conversations_list(type = "public_channel")
+question_channels_df <- dplyr::filter(
+  channels, stringr::str_starts(.data$name, "help-")
+)
+
+question_channels <- rlang::set_names(
+  question_channels_df$id,
+  question_channels_df$name
+)
+
+conversations <- purrr::map(
+  question_channels,
+  slackthreads::conversations
+)
+
+# As of this test, it takes about 3 seconds to get all conversations (minus
+# replies) in help channels on R4DS.
+
+# I'm not writing this yet, but the strategy should be to get the new
+# conversations object, and check for changes in
+# conversations${channel}[[{n}]]$latest_reply, and then fetch replies for THOSE
+# specifically. Therefore we won't use slackthreads::all_conversation_replies()
+# for updates, only for the initial fetch.
+
+threads <- conversations |>
+  purrr::map(
+    slackthreads::all_conversation_replies
+  )
+
+# This step takes about 7 minutes. Technically I guess GHA would be ok with
+# that, but it feels better to be more targeted.
+
+conversations_r4ds <- tidy_conversations(conversations, threads) |> 
+  r4ds_process_convos()
+```

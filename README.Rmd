@@ -35,7 +35,11 @@ remotes::install_github("r4ds/r4dsposts")
 
 ## Usage
 
-Add usage information and examples here.
+This package provides helpers for fetching and cleaning data about the [R4DS Online Learning Community](https://r4ds.io).
+Most of these functions were originally developed as part of the [mentordash](https://github.com/r4ds/mentordash), but they have been refined and expanded here.
+Some functions probably *should* be pulled out into a more general-use package.
+We are intentionally keeping the Imports list for [slackthreads](https://github.com/yonicd/slackthreads) light, so for now they're here.
+Ultimately I'll likely write a bridge package for the general-purpose Slack tidying functions.
 
 ## Code of Conduct
 
