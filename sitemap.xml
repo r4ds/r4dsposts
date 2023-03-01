@@ -19,15 +19,30 @@
     <loc>https://r4ds.github.io/r4dsposts/SUPPORT.html</loc>
   </url>
   <url>
+    <loc>https://r4ds.github.io/r4dsposts/articles/api-archive.html</loc>
+  </url>
+  <url>
+    <loc>https://r4ds.github.io/r4dsposts/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://r4ds.github.io/r4dsposts/authors.html</loc>
   </url>
   <url>
     <loc>https://r4ds.github.io/r4dsposts/index.html</loc>
   </url>
   <url>
+    <loc>https://r4ds.github.io/r4dsposts/reference/dot-has_reaction.html</loc>
+  </url>
+  <url>
     <loc>https://r4ds.github.io/r4dsposts/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://r4ds.github.io/r4dsposts/reference/r4ds_process_convos.html</loc>
+  </url>
+  <url>
     <loc>https://r4ds.github.io/r4dsposts/reference/r4dsposts-package.html</loc>
+  </url>
+  <url>
+    <loc>https://r4ds.github.io/r4dsposts/reference/tidy_conversations.html</loc>
   </url>
 </urlset>
