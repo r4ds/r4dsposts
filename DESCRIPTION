@@ -9,9 +9,26 @@ Description: r4dsposts will be used to create an archive of posts on the
 License: MIT + file LICENSE
 URL: https://github.com/r4ds/r4dsposts, https://r4ds.github.io/r4dsposts/
 BugReports: https://github.com/r4ds/r4dsposts/issues
+Depends: 
+    R (>= 2.10)
+Imports: 
+    dplyr,
+    purrr,
+    rlang (>= 0.4.11),
+    slackcalls,
+    tibble,
+    tidyr,
+    utils
 Suggests: 
     covr,
+    knitr,
+    rmarkdown,
+    roxygen2,
     testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Remotes:
+    yonicd/slackcalls
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
