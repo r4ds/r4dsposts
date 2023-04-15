@@ -27,5 +27,5 @@
       $ pinned_by         <chr> NA, NA, NA, NA, NA, NA
       $ pinned_ts         <int> NA, NA, NA, NA, NA, NA
       $ replies           <list> [<tbl_df[2 x 7]>], [<tbl_df[6 x 7]>], [<tbl_df[0 x ~
-      $ status            <chr> "answered", "answered", "unknown", "needs more info~
+      $ status            <chr> "answered", "answered", "new", "needs more info", "~
 

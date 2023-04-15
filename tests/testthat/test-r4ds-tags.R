@@ -1,7 +1,3 @@
-test_that("A silly success.", {
-  succeed("Adding a success as a starting point to beat.")
-})
-
 test_that("r4ds_process_convos produces expected results", {
   skip_if(Sys.getenv("SLACK_API_TOKEN") == "")
   expect_snapshot({
