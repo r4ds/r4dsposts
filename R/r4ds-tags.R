@@ -113,6 +113,8 @@ r4ds_process_convos <- function(convos_tbl) {
           .data$reaction_more_info &
             .data$reply_count > 0 &
             .data$user_replied_last ~ "answerable",
+          .data$reply_count > 0 ~ "probably more info",
+          .data$reply_count == 0 ~ "new",
           TRUE ~ "unknown"
         )
       ) |>

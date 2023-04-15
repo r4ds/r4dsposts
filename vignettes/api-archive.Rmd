@@ -60,3 +60,15 @@ threads <- conversations |>
 conversations_r4ds <- tidy_conversations(conversations, threads) |>
   r4ds_process_convos()
 ```
+
+```{r current statistics}
+conversations_r4ds |> 
+  dplyr::summarize(
+    answered = sum(status == "answered"),
+    answerable = sum(status %in% c("answerable", "new", "probably more info")),
+    more_info = sum(status %in% c("needs more info")),
+    total = answered + answerable + more_info,
+    .by = "channel_name"
+  ) |> 
+  dplyr::arrange(total)
+```
