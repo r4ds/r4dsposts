@@ -119,6 +119,16 @@
 <span></span>
 <span><span class="va">conversations_r4ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_conversations.html">tidy_conversations</a></span><span class="op">(</span><span class="va">conversations</span>, <span class="va">threads</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/r4ds_process_convos.html">r4ds_process_convos</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">conversations_r4ds</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span></span>
+<span>    answered <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="st">"answered"</span><span class="op">)</span>,</span>
+<span>    answerable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">status</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"answerable"</span>, <span class="st">"new"</span>, <span class="st">"probably more info"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    more_info <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">status</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"needs more info"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    total <span class="op">=</span> <span class="va">answered</span> <span class="op">+</span> <span class="va">answerable</span> <span class="op">+</span> <span class="va">more_info</span>,</span>
+<span>    .by <span class="op">=</span> <span class="st">"channel_name"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span></span></code></pre></div>
   </main>
 </div>
 
