@@ -151,6 +151,10 @@ tidy_conversations <- function(conversations, threads = NULL) {
 }
 
 .simplify_pins <- function(convos_tbl) {
+  if (!("pinned_to" %in% colnames(convos_tbl))) {
+    return(convos_tbl)
+  }
+
   convos_tbl$pinned_to <- convos_tbl$pinned_to |>
     purrr::map_chr(
       \(value) {
@@ -176,7 +180,7 @@ tidy_conversations <- function(conversations, threads = NULL) {
 }
 
 .simplify_edited <- function(convos_tbl) {
-  if (length(convos_tbl$edited)) {
+  if ("edited" %in% colnames(convos_tbl)) {
     convos_tbl <- convos_tbl |>
       dplyr::mutate(
         edited_at = purrr::map_chr(
