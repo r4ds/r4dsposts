@@ -42,8 +42,13 @@ tidy_conversations <- function(conversations, threads = NULL) {
 }
 
 .rectangle_conversation_single <- function(conversation) {
+  UseMethod(".rectangle_conversation_single")
+}
+
+#' @export
+.rectangle_conversation_single.conversations.history <- function(conversation) {
   # Drop the special class since we don't use it.
-  class(conversation) <- "list"
+  conversation <- unclass(conversation)
   this_tbl <- tibble::tibble(
     channel_id = attr(conversation, "channel"),
     conversations = as.list(conversation)
@@ -52,13 +57,20 @@ tidy_conversations <- function(conversations, threads = NULL) {
 
   # Drop the special classes from columns, too.
   for (col_name in colnames(this_tbl)) {
-    class(this_tbl[[col_name]]) <- setdiff(
-      class(this_tbl[[col_name]]),
-      c("conversation", "reply")
-    )
+    this_tbl[[col_name]] <- unclass(this_tbl[[col_name]])
   }
 
   return(this_tbl)
+}
+
+#' @export
+.rectangle_conversation_single.default <- function(conversation) {
+  cli::cli_abort(
+    paste(
+      "{.arg conversation} should be a {.cls conversations.history} object,",
+      "not a {.cls class(conversation)}."
+    )
+  )
 }
 
 .reply_zeros <- function(convos_tbl) {
